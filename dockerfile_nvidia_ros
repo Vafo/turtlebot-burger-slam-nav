@@ -11,14 +11,26 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 RUN apt-get update \
  && apt-get install -y --no-install-recommends ros-noetic-desktop-full
+
 RUN apt-get install -y --no-install-recommends python3-rosdep
 RUN rosdep init \
  && rosdep fix-permissions \
  && rosdep update
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
+
+RUN apt-get install -y ros-noetic-joy ros-noetic-teleop-twist-joy \
+    ros-noetic-teleop-twist-keyboard ros-noetic-laser-proc \
+    ros-noetic-rgbd-launch ros-noetic-rosserial-arduino \
+    ros-noetic-rosserial-python ros-noetic-rosserial-client \
+    ros-noetic-rosserial-msgs ros-noetic-amcl ros-noetic-map-server \
+    ros-noetic-move-base ros-noetic-urdf ros-noetic-xacro \
+    ros-noetic-compressed-image-transport ros-noetic-rqt* ros-noetic-rviz \
+    ros-noetic-gmapping ros-noetic-slam-gmapping ros-noetic-navigation ros-noetic-interactive-markers
+
 # nvidia-container-runtime
 ENV NVIDIA_VISIBLE_DEVICES \
     ${NVIDIA_VISIBLE_DEVICES:-all}
 ENV NVIDIA_DRIVER_CAPABILITIES \
     ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
+
