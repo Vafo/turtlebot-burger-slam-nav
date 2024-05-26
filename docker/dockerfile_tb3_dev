@@ -1,0 +1,24 @@
+FROM turtlebot3_base:latest
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN git clone https://github.com/vim/vim.git /vim-src \
+  && apt install -y libncurses-dev build-essential cmake vim-nox python3-dev
+
+RUN cd /vim-src/src  \
+  && ./configure --enable-shared  --enable-python3interp \
+  && make \
+  && make install
+
+COPY vim/.vimrc /root
+RUN git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+RUN vim +PluginInstall +qall
+
+RUN cd ~/.vim/plugged/YouCompleteMe  \
+  && python3 install.py --clangd-completer --force-sudo
+
+# Set the working folder at startup
+WORKDIR /turtlebot3_ws
+
+COPY ./entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]

@@ -21,7 +21,7 @@ RUN apt install -y build-essential
 # Build the Catkin workspace and ensure it's sourced
 RUN source /opt/ros/noetic/setup.bash \
  && cd turtlebot3_ws \
- && catkin_make
+ && catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 RUN echo "source /turtlebot3_ws/devel/setup.bash" >> ~/.bashrc
  
 RUN source /opt/ros/noetic/setup.bash \
@@ -29,11 +29,3 @@ RUN source /opt/ros/noetic/setup.bash \
   && git clone https://github.com/ROBOTIS-GIT/ros_tutorials.git  \
   && cd /turtlebot3_ws \
   && catkin_make
-
-RUN apt install -y vim bear
-
-# Set the working folder at startup
-WORKDIR /turtlebot3_ws
-
-COPY ./entrypoint.sh /
-ENTRYPOINT ["/entrypoint.sh"]
