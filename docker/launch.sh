@@ -29,7 +29,7 @@ docker run \
     --env="DISPLAY=${DISPLAY}" \
     --env="QT_X11_NO_MITSHM=1" \
     \
-    --volume="${PWD}:/turtlebot3_ws/src/$(basename ${PWD}):rw" \
+    --volume="${PWD}/cd_harmony:/turtlebot3_ws/src/cd_harmony:rw" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     \
     --env "ROS_MASTER_URI=http://$ROS_REMOTE_PC:$ROS_PORT" \
