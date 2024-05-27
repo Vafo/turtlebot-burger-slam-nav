@@ -175,7 +175,7 @@ include_directories(
 # )
 
 ## Mark cpp header files for installation
-install(DIRECTORY launch maps models param worlds
+install(DIRECTORY launch maps models param worlds config
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
