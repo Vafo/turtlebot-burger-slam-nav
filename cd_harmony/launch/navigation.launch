@@ -4,6 +4,7 @@
   <arg name="map_file" default="$(find cd_harmony)/maps/map.yaml"/>
   <arg name="open_rviz" default="true"/>
   <arg name="move_forward_only" default="false"/>
+  <arg name="param_folder" default="default"/>
 
   <!-- Turtlebot3 -->
   <include file="$(find turtlebot3_bringup)/launch/turtlebot3_remote.launch">
@@ -20,6 +21,7 @@
   <include file="$(find cd_harmony)/launch/move_base.launch">
     <arg name="model" value="$(arg model)" />
     <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+    <arg name="param_folder" value="$(arg param_folder)" />
   </include>
 
   <!-- rviz -->
