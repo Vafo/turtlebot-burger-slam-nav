@@ -24,6 +24,8 @@
     <arg name="param_folder" value="$(arg param_folder)" />
   </include>
 
+  <node pkg="cd_harmony" type="waypoints_server" name="waypoints_server"/>
+
   <!-- rviz -->
   <group if="$(arg open_rviz)"> 
     <node pkg="rviz" type="rviz" name="rviz" required="true"
