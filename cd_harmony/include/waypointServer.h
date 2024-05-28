@@ -11,16 +11,16 @@
 #include <iostream>
 #include <fstream>
 
-#include "waypoints/waypoint_msg.h"
-#include "waypoints/waypoint_group.h"
-#include "waypoints/waypoint_array.h"
-#include "waypoints/Save_Wp.h"
-#include "waypoints/Load_Wp.h"
-#include "waypoints/Run_Wp.h"
-#include "waypoints/Stop_Wp.h"
-#include "waypoints/Delete_Wp.h"
-#include "waypoints/Groups_Wp.h"
-#include "waypoints/Wp_2_Group.h"
+#include "cd_harmony/waypoint_msg.h"
+#include "cd_harmony/waypoint_group.h"
+#include "cd_harmony/waypoint_array.h"
+#include "cd_harmony/Save_Wp.h"
+#include "cd_harmony/Load_Wp.h"
+#include "cd_harmony/Run_Wp.h"
+#include "cd_harmony/Stop_Wp.h"
+#include "cd_harmony/Delete_Wp.h"
+#include "cd_harmony/Groups_Wp.h"
+#include "cd_harmony/Wp_2_Group.h"
 
 #define foreach BOOST_FOREACH
 
@@ -32,16 +32,16 @@ class WaypointServer
 {
 public:
     WaypointServer();
-    bool SaveWp(waypoints::Save_Wp::Request &req, waypoints::Save_Wp::Response &res);
-    bool LoadWp(waypoints::Load_Wp::Request &req, waypoints::Load_Wp::Response &res);
-    void CallbackGr(waypoints::waypoint_group gr_msg);
-    void CallbackWp(waypoints::waypoint_msg wp_msg);
+    bool SaveWp(cd_harmony::Save_Wp::Request &req, cd_harmony::Save_Wp::Response &res);
+    bool LoadWp(cd_harmony::Load_Wp::Request &req, cd_harmony::Load_Wp::Response &res);
+    void CallbackGr(cd_harmony::waypoint_group gr_msg);
+    void CallbackWp(cd_harmony::waypoint_msg wp_msg);
     void PublishWp();
-    bool RunWp(waypoints::Run_Wp::Request &req, waypoints::Run_Wp::Response &res);
-    bool StopWp(waypoints::Stop_Wp::Request &req, waypoints::Stop_Wp::Response &res);
-    bool DeleteWp(waypoints::Delete_Wp::Request &req, waypoints::Delete_Wp::Response &res);
-    bool GroupOptionWp(waypoints::Groups_Wp::Request &req, waypoints::Groups_Wp::Response &res);
-    bool WpGroup(waypoints::Wp_2_Group::Request &req, waypoints::Wp_2_Group::Response &res);
+    bool RunWp(cd_harmony::Run_Wp::Request &req, cd_harmony::Run_Wp::Response &res);
+    bool StopWp(cd_harmony::Stop_Wp::Request &req, cd_harmony::Stop_Wp::Response &res);
+    bool DeleteWp(cd_harmony::Delete_Wp::Request &req, cd_harmony::Delete_Wp::Response &res);
+    bool GroupOptionWp(cd_harmony::Groups_Wp::Request &req, cd_harmony::Groups_Wp::Response &res);
+    bool WpGroup(cd_harmony::Wp_2_Group::Request &req, cd_harmony::Wp_2_Group::Response &res);
     void onLoop(int state);
 
 protected:
@@ -61,8 +61,8 @@ protected:
     bool stop;
 
     //internal variables
-    std::map<std::string, waypoints::waypoint_msg> wp_map;
-    std::map<std::string, waypoints::waypoint_group> groups;
+    std::map<std::string, cd_harmony::waypoint_msg> wp_map;
+    std::map<std::string, cd_harmony::waypoint_group> groups;
 
     ros::Subscriber sub_wp;
     ros::Subscriber sub_gr;
