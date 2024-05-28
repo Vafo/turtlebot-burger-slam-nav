@@ -1,4 +1,4 @@
-<library path="libwaypoints">
+<library path="libcd_harmony">
   <class name="cd_harmony/Waypoints"
          type="waypoints::WaypointTool"
          base_class_type="rviz::Tool">
