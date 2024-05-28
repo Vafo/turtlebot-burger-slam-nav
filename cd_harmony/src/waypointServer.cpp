@@ -9,8 +9,8 @@ WaypointServer::WaypointServer()
 
   sub_wp = n.subscribe("waypoint", 100, &WaypointServer::CallbackWp, this);
   sub_gr = n.subscribe("waypoint_server/waypoints_gr", 100, &WaypointServer::CallbackGr, this);
-  pub_wp = n.advertise<cd_harmony::waypoint_array>("waypoint_server/waypoints", 1);
-  pub_gr = n.advertise<cd_harmony::waypoint_group>("waypoint_server/waypoints_gr", 1);
+  pub_wp = n.advertise<waypoints::waypoint_array>("waypoint_server/waypoints", 1);
+  pub_gr = n.advertise<waypoints::waypoint_group>("waypoint_server/waypoints_gr", 1);
   pub_debug = n.advertise<std_msgs::String>("waypoint_server/statusGoal", 100);
   srv_run_wp = n.advertiseService("waypoint_server/run_wp", &WaypointServer::RunWp, this);
   srv_stop_wp = n.advertiseService("waypoint_server/stop_wp", &WaypointServer::StopWp, this);
@@ -21,7 +21,7 @@ WaypointServer::WaypointServer()
   srv_load = n.advertiseService("waypoint_server/load_wp", &WaypointServer::LoadWp, this);
 }
 
-bool WaypointServer::SaveWp(cd_harmony::Save_Wp::Request &req, cd_harmony::Save_Wp::Response &res)
+bool WaypointServer::SaveWp(waypoints::Save_Wp::Request &req, waypoints::Save_Wp::Response &res)
 {
   std::string pathFile = path + "/files/" + req.file_name + "_wp.txt";
   ofstream file;
@@ -52,7 +52,7 @@ bool WaypointServer::SaveWp(cd_harmony::Save_Wp::Request &req, cd_harmony::Save_
   return true;
 }
 
-bool WaypointServer::LoadWp(cd_harmony::Load_Wp::Request &req, cd_harmony::Load_Wp::Response &res)
+bool WaypointServer::LoadWp(waypoints::Load_Wp::Request &req, waypoints::Load_Wp::Response &res)
 {
   string pathFile = path + "/files/" + req.file_name + "_wp.txt";
   string msg = "rostopic pub -f " + pathFile + " /waypoint waypoints/waypoint_msg";
@@ -68,14 +68,14 @@ bool WaypointServer::LoadWp(cd_harmony::Load_Wp::Request &req, cd_harmony::Load_
   return true;
 }
 
-void WaypointServer::CallbackGr(cd_harmony::waypoint_group gr_msg)
+void WaypointServer::CallbackGr(waypoints::waypoint_group gr_msg)
 {
   groups[gr_msg.name] = gr_msg;
   ROS_INFO("Received gr %s", gr_msg.name.c_str());
   PublishWp();
 }
 
-void WaypointServer::CallbackWp(cd_harmony::waypoint_msg wp_msg)
+void WaypointServer::CallbackWp(waypoints::waypoint_msg wp_msg)
 {
   wp_map[wp_msg.name] = wp_msg;
   ROS_INFO("Received wp %s", wp_msg.name.c_str());
@@ -84,7 +84,7 @@ void WaypointServer::CallbackWp(cd_harmony::waypoint_msg wp_msg)
 
 void WaypointServer::PublishWp()
 {
-  cd_harmony::waypoint_array arrayWp;
+  waypoints::waypoint_array arrayWp;
   //waypoints
 
   arrayWp.waypoints.resize(wp_map.size());
@@ -116,7 +116,7 @@ void WaypointServer::PublishWp()
   pub_wp.publish(arrayWp);
 }
 
-bool WaypointServer::RunWp(cd_harmony::Run_Wp::Request &req, cd_harmony::Run_Wp::Response &res)
+bool WaypointServer::RunWp(waypoints::Run_Wp::Request &req, waypoints::Run_Wp::Response &res)
 {
   std::vector<std::string> wp_list = {};
   int i = req.index;
@@ -191,7 +191,7 @@ bool WaypointServer::RunWp(cd_harmony::Run_Wp::Request &req, cd_harmony::Run_Wp:
   return true;
 }
 
-bool WaypointServer::StopWp(cd_harmony::Stop_Wp::Request &req, cd_harmony::Stop_Wp::Response &res)
+bool WaypointServer::StopWp(waypoints::Stop_Wp::Request &req, waypoints::Stop_Wp::Response &res)
 {
   stop = 1;
   system("rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {} ");
@@ -199,7 +199,7 @@ bool WaypointServer::StopWp(cd_harmony::Stop_Wp::Request &req, cd_harmony::Stop_
   return true;
 }
 
-bool WaypointServer::DeleteWp(cd_harmony::Delete_Wp::Request &req, cd_harmony::Delete_Wp::Response &res)
+bool WaypointServer::DeleteWp(waypoints::Delete_Wp::Request &req, waypoints::Delete_Wp::Response &res)
 {
 
   if (wp_map.find(req.wp_name) == wp_map.end())
@@ -236,11 +236,11 @@ bool WaypointServer::DeleteWp(cd_harmony::Delete_Wp::Request &req, cd_harmony::D
   return true;
 }
 
-bool WaypointServer::GroupOptionWp(cd_harmony::Groups_Wp::Request &req, cd_harmony::Groups_Wp::Response &res)
+bool WaypointServer::GroupOptionWp(waypoints::Groups_Wp::Request &req, waypoints::Groups_Wp::Response &res)
 {
   if (req.option == "add")
   {
-    cd_harmony::waypoint_group gr;
+    waypoints::waypoint_group gr;
     gr.name = req.group_name;
     groups[req.group_name] = gr;
     ROS_INFO("Add new group: %s", req.group_name.c_str());
@@ -269,7 +269,7 @@ bool WaypointServer::GroupOptionWp(cd_harmony::Groups_Wp::Request &req, cd_harmo
   return true;
 }
 
-bool WaypointServer::WpGroup(cd_harmony::Wp_2_Group::Request &req, cd_harmony::Wp_2_Group::Response &res)
+bool WaypointServer::WpGroup(waypoints::Wp_2_Group::Request &req, waypoints::Wp_2_Group::Response &res)
 {
   if (req.option == "add")
   {

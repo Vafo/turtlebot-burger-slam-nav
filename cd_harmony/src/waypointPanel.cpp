@@ -83,16 +83,16 @@ namespace waypoints
         ROS_INFO("Update waypoint server");
     }
 
-    void waypointPanel::Callback(cd_harmony::waypoint_array wp_msg)
+    void waypointPanel::Callback(waypoints::waypoint_array wp_msg)
     {
         ROS_INFO("Received wp_msg");
         wp_map.clear();
-        for (cd_harmony::waypoint_msg wp : wp_msg.waypoints)
+        for (waypoints::waypoint_msg wp : wp_msg.waypoints)
         {
             wp_map[wp.name] = wp;
         }
         groups.clear();
-        for (cd_harmony::waypoint_group gr : wp_msg.groups)
+        for (waypoints::waypoint_group gr : wp_msg.groups)
         {
             groups[gr.name] = gr;
         }

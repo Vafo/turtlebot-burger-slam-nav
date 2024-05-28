@@ -1,7 +1,7 @@
 #include <tf/transform_listener.h>
 
 #include <geometry_msgs/PoseStamped.h>
-#include "cd_harmony/waypoint_msg.h"
+#include "waypoints/waypoint_msg.h"
 #include "rviz/display_context.h"
 #include "rviz/properties/string_property.h"
 
@@ -34,7 +34,7 @@ namespace waypoints
   {
     try
     {
-      pub_ = nh_.advertise<cd_harmony::waypoint_msg>("/waypoint", 1);
+      pub_ = nh_.advertise<waypoints::waypoint_msg>("/waypoint", 1);
     }
     catch (const ros::Exception &e)
     {
@@ -55,7 +55,7 @@ namespace waypoints
              name_wp.c_str(), waypoint.pose.position.x, waypoint.pose.position.y, waypoint.pose.position.z,
              waypoint.pose.orientation.x, waypoint.pose.orientation.y, waypoint.pose.orientation.z, waypoint.pose.orientation.w, theta);
 
-    cd_harmony::waypoint_msg msg;
+    waypoints::waypoint_msg msg;
     msg.name = name_wp;
     msg.pose.orientation = waypoint.pose.orientation; 
     msg.pose.position = waypoint.pose.position;

@@ -8,9 +8,9 @@
 #include <geometry_msgs/PoseArray.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <nav_msgs/Path.h>
-#include "cd_harmony/waypoint_msg.h"
-#include "cd_harmony/waypoint_group.h"
-#include "cd_harmony/waypoint_array.h"
+#include "waypoints/waypoint_msg.h"
+#include "waypoints/waypoint_group.h"
+#include "waypoints/waypoint_array.h"
 
 
 
@@ -32,7 +32,7 @@ namespace waypoints
     public:
         explicit waypointPanel(QWidget *parent = 0);
         virtual ~waypointPanel();
-        void Callback(cd_harmony::waypoint_array wp_msg);
+        void Callback(waypoints::waypoint_array wp_msg);
         void PublishWp();
         Ui::waypointPanel *ui;
 
@@ -55,8 +55,8 @@ namespace waypoints
         ros::Publisher pub_rviz;
         ros::Publisher pub_path;
 
-        std::map<std::string, cd_harmony::waypoint_msg> wp_map;
-        std::map<std::string, cd_harmony::waypoint_group> groups;
+        std::map<std::string, waypoints::waypoint_msg> wp_map;
+        std::map<std::string, waypoints::waypoint_group> groups;
         std::string textGroupBox = "";
     };
 
