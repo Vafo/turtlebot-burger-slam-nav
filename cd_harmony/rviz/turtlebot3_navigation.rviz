@@ -32,7 +32,7 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: ""
-  - Class: waypoints/waypointPanel
+  - Class: cd_harmony/waypointPanel
     Name: waypointPanel
 Preferences:
   PromptSaveOnExit: true
@@ -354,7 +354,7 @@ Visualization Manager:
     - Class: rviz/SetGoal
       Topic: /move_base_simple/goal
     - Class: rviz/Measure
-    - Class: waypoints/Waypoints
+    - Class: cd_harmony/Waypoints
       Topic: waypoint
   Value: true
   Views:
