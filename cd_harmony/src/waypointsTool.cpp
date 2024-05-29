@@ -12,7 +12,7 @@
 #include <ros/master.h>
 #include <cstddef>
 
-namespace waypoints
+namespace cd_harmony
 {
 
   WaypointTool::WaypointTool()
@@ -63,7 +63,7 @@ namespace waypoints
     pub_.publish(msg);
   }
 
-} // end namespace waypoints
+} // end namespace cd_harmony
 
 #include <pluginlib/class_list_macros.hpp>
-PLUGINLIB_EXPORT_CLASS(waypoints::WaypointTool, rviz::Tool)
+PLUGINLIB_EXPORT_CLASS(cd_harmony::WaypointTool, rviz::Tool)

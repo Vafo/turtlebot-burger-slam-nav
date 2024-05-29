@@ -5,7 +5,7 @@ WaypointServer::WaypointServer()
 {
   ROS_INFO("Start waypoint Server");
 
-  path = ros::package::getPath("waypoints");
+  path = ros::package::getPath("cd_harmony");
 
   sub_wp = n.subscribe("waypoint", 100, &WaypointServer::CallbackWp, this);
   sub_gr = n.subscribe("waypoint_server/waypoints_gr", 100, &WaypointServer::CallbackGr, this);
@@ -55,12 +55,12 @@ bool WaypointServer::SaveWp(cd_harmony::Save_Wp::Request &req, cd_harmony::Save_
 bool WaypointServer::LoadWp(cd_harmony::Load_Wp::Request &req, cd_harmony::Load_Wp::Response &res)
 {
   string pathFile = path + "/files/" + req.file_name + "_wp.txt";
-  string msg = "rostopic pub -f " + pathFile + " /waypoint waypoints/waypoint_msg";
+  string msg = "rostopic pub -f " + pathFile + " /waypoint cd_harmony/waypoint_msg";
   ROS_INFO("Loaded file %s_wp.txt", req.file_name.c_str());
   system(msg.c_str());
 
   pathFile = path + "/files/" + req.file_name + "_gr.txt";
-  msg = "rostopic pub -f " + pathFile + " /waypoint_server/waypoints_gr waypoints/waypoint_group";
+  msg = "rostopic pub -f " + pathFile + " /waypoint_server/waypoints_gr cd_harmony/waypoint_group";
   ROS_INFO("Loaded file %s_gr.txt", req.file_name.c_str());
   system(msg.c_str());
 

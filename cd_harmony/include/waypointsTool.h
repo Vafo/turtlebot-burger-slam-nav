@@ -11,7 +11,7 @@ namespace rviz
 {
 	class StringProperty;
 }
-namespace waypoints
+namespace cd_harmony
 {
 	class WaypointTool: public rviz::PoseTool
 	{

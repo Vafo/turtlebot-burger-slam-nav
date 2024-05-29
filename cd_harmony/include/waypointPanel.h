@@ -22,7 +22,7 @@ namespace Ui
 {
     class waypointPanel;
 }
-namespace waypoints
+namespace cd_harmony
 {
 
     class waypointPanel : public rviz::Panel
