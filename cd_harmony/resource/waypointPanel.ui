@@ -50,6 +50,20 @@
      <item>
       <widget class="QListWidget" name="listWp"/>
      </item>
+     <item>
+      <widget class="QPushButton" name="runWpButton">
+       <property name="text">
+        <string>Run Waypoint</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="deleteWpButton">
+       <property name="text">
+        <string>Delete Waypoint</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item row="3" column="1">
@@ -57,14 +71,14 @@
      <item>
       <widget class="QPushButton" name="add2GroupButton">
        <property name="text">
-        <string>+ to group</string>
+        <string>+</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="delete2GroupButton">
        <property name="text">
-        <string>- from group</string>
+        <string>-</string>
        </property>
       </widget>
      </item>
@@ -107,7 +121,7 @@
      <item row="2" column="0">
       <widget class="QPushButton" name="stopGroupButton">
        <property name="text">
-        <string>Stop Group</string>
+        <string>Stop</string>
        </property>
       </widget>
      </item>
@@ -127,6 +141,13 @@
        </property>
       </spacer>
      </item>
+     <item row="5" column="0">
+      <widget class="QPushButton" name="deleteGroupButton">
+       <property name="text">
+        <string>Delete Group</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QPushButton" name="runGroupButton">
        <property name="text">
@@ -136,7 +157,7 @@
      </item>
     </layout>
    </item>
-   <item row="5" column="1">
+   <item row="5" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <property name="topMargin">
       <number>5</number>
