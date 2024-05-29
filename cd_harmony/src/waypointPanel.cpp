@@ -8,7 +8,7 @@
 #include <ros/master.h>
 #include <thread>
 
-namespace waypoints
+namespace cd_harmony
 {
     waypointPanel::waypointPanel(QWidget *parent) : rviz::Panel(parent),
                                                     ui(new Ui::waypointPanel)
@@ -239,6 +239,6 @@ namespace waypoints
     void waypointPanel::onLoop(int state)
     {
     }
-} // end namespace waypoints
+} // end namespace cd_harmony
 #include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(waypoints::waypointPanel, rviz::Panel)
+PLUGINLIB_EXPORT_CLASS(cd_harmony::waypointPanel, rviz::Panel)

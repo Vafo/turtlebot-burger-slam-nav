@@ -1,13 +1,13 @@
 <library path="libcd_harmony">
   <class name="cd_harmony/Waypoints"
-         type="waypoints::WaypointTool"
+         type="cd_harmony::WaypointTool"
          base_class_type="rviz::Tool">
     <description>
       Tool for set waypoints for navigation
     </description>
   </class>
    <class name="cd_harmony/waypointPanel"
-         type="waypoints::waypointPanel"
+         type="cd_harmony::waypointPanel"
          base_class_type="rviz::Panel">
     <description>
       Panel for waypoints

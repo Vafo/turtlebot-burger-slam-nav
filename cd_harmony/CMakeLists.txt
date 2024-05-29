@@ -10,7 +10,7 @@ qt5_add_resources(QT_RESOURCES_CPP ${QT_RESOURCES})
 
 add_definitions(-DQT_NO_KEYWORDS)
 
-set(${PROJECT_NAME}_INCLUDE_DIRECTORIES
+set(cd_harmony_INCLUDE_DIRECTORIES
   include
   ${CMAKE_CURRENT_BINARY_DIR}
 )
